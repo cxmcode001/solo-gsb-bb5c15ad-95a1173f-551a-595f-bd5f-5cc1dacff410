@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>地震到时拾取审阅台</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header id="topbar">
+        <div class="brand">
+          <span class="logo">▤</span>
+          <h1>到时拾取审阅台</h1>
+        </div>
+        <div id="header-info" class="header-info"></div>
+        <div class="top-tools">
+          <label class="tool">
+            作者
+            <input id="author" size="9" placeholder="reviewer" />
+          </label>
+          <label class="tool">
+            默认 ±s
+            <input id="default-unc" type="number" min="0" step="0.05" value="0.2"
+                   size="4" style="width: 56px" />
+          </label>
+          <button id="phase-p" class="phase-btn p" title="进入 P 到时放置模式（再按一次或 Esc 取消）">
+            + P 到时
+          </button>
+          <button id="phase-s" class="phase-btn s" title="进入 S 到时放置模式">
+            + S 到时
+          </button>
+          <span class="sep"></span>
+          <button id="btn-import-file">导入 JSON</button>
+          <div class="popup-wrap">
+            <button id="btn-sample">内置样例 ▾</button>
+            <div id="sample-menu" class="popup"></div>
+          </div>
+          <select id="dataset-select" title="切换数据集"></select>
+          <button id="btn-refresh" title="刷新列表">⟳</button>
+          <span class="sep"></span>
+          <button id="btn-export-json" class="primary" disabled>导出 JSON</button>
+          <button id="btn-export-csv" disabled>导出 CSV</button>
+          <label class="tool" title="所有台站共享缩放/平移窗口">
+            <input type="checkbox" id="link-views" checked /> 联动
+          </label>
+          <input type="file" id="file-input" accept="application/json,.json" hidden />
+        </div>
+      </header>
+
+      <main id="main">
+        <div id="stations" class="stations">
+          <div class="welcome">
+            <h2>地震台站 P / S 到时拾取审阅台</h2>
+            <ol>
+              <li>点击右上角 <b>「内置样例」</b> 一键加载 4 台站演示数据；
+                  或 <b>「导入 JSON」</b> 上传带时间戳的波形采样文件。</li>
+              <li>波形上 <b>滚轮缩放</b>、<b>拖拽平移</b>（勾选「联动」可同步所有台站）。</li>
+              <li>选择 <b>+ P / + S</b> 放置模式后在波形上点击即可添加到时；
+                  已有的到时线可<b>拖动移位</b>，两侧短柄可拖动调整 <b>±不确定窗</b>。</li>
+              <li>不确定窗互不重叠的拾取会被标红为<b>冲突</b>；
+                  右栏给出按 <code>1/u²</code> 加权的<b>共识到时</b>。</li>
+              <li>逐条 <b>接受 / 拒绝 / 撤销</b>，最后导出审阅结果（JSON / CSV）。</li>
+            </ol>
+            <p class="muted">数据格式参见仓库 README。所有数据保存在服务端 SQLite 中。</p>
+          </div>
+        </div>
+
+        <aside id="sidebar">
+          <section class="side-section">
+            <h2>冲突 <small class="muted">区间不重叠</small></h2>
+            <div id="panel-conflicts"></div>
+          </section>
+          <section class="side-section">
+            <h2>加权共识到时</h2>
+            <div id="panel-consensus"></div>
+          </section>
+          <section class="side-section">
+            <h2>拾取详情</h2>
+            <div id="panel-editor"></div>
+          </section>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="/assets/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "seismic-pick-review-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Vanilla TypeScript frontend for the seismic pick review workbench",
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit",
+    "watch": "node build.mjs --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "esbuild": "^0.24.0"
+  }
+}
